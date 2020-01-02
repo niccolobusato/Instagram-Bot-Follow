@@ -1,0 +1,338 @@
+[
+    {
+        "id": "f66805f9.1e11b8",
+        "type": "tab",
+        "label": "Follow pagina",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7b47ce29.6a818",
+        "type": "inject",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "topic": "",
+        "payload": "https://www.instagram.com/accounts/login/?source=auth_switcher",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "fab83aef.34b728"
+            ]
+        ]
+    },
+    {
+        "id": "fab83aef.34b728",
+        "type": "function",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "func": "msg.payload = Math.round(Math.random()*10);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "77bd61ed.0dee7"
+            ]
+        ]
+    },
+    {
+        "id": "77bd61ed.0dee7",
+        "type": "credentials",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "props": [
+            {
+                "value": "username",
+                "type": "msg"
+            },
+            {
+                "value": "passclass",
+                "type": "msg"
+            },
+            {
+                "value": "url",
+                "type": "msg"
+            },
+            {
+                "value": "pass",
+                "type": "msg"
+            },
+            {
+                "value": "accesso",
+                "type": "msg"
+            }
+        ],
+        "x": 570,
+        "y": 160,
+        "wires": [
+            [
+                "3c76f3d.7fa250c",
+                "61231fee.9dc3f"
+            ]
+        ]
+    },
+    {
+        "id": "3c76f3d.7fa250c",
+        "type": "function",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "func": "var mypayload = msg.payload;\n\nmsg.payload = {\n\tchatId:\"132587021\", //your chatId\n\ttype:\"message\",\n\tcontent: \"Instagram ha iniziato\" \n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "6f20294b.595e18"
+            ]
+        ]
+    },
+    {
+        "id": "c9831c41.36637",
+        "type": "function",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "func": "var mypayload = msg.payload;\n\nmsg.payload = {\n\tchatId:\"132587021\", //your chatId\n\ttype:\"message\",\n\tcontent: \"Instagram ha finito\" \n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 240,
+        "wires": [
+            [
+                "6f20294b.595e18"
+            ]
+        ]
+    },
+    {
+        "id": "6f20294b.595e18",
+        "type": "telegram sender",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "bot": "57d987d8.63d3c8",
+        "x": 1200,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2e93ff11.329ea",
+        "type": "inject",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 820,
+        "y": 340,
+        "wires": [
+            [
+                "c9831c41.36637"
+            ]
+        ]
+    },
+    {
+        "id": "8c6eadc9.2110b",
+        "type": "comment",
+        "z": "f66805f9.1e11b8",
+        "name": "H2H credenziali",
+        "info": "h2h_digital\nh2hdigital01",
+        "x": 340,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "61231fee.9dc3f",
+        "type": "nbrowser",
+        "z": "f66805f9.1e11b8",
+        "name": "",
+        "methods": [
+            {
+                "name": "gotoURL",
+                "func": "goto",
+                "params": [
+                    {
+                        "type": "msg",
+                        "value": "accesso",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "type",
+                "func": "type",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": ".f0n8F ",
+                        "typeDefault": "str"
+                    },
+                    {
+                        "type": "msg",
+                        "value": "username",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "wait",
+                "func": "wait",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "12",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "gotoURL",
+                "func": "goto",
+                "params": [
+                    {
+                        "type": "msg",
+                        "value": "url",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "wait",
+                "func": "wait",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "7",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "click",
+                "func": "click",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "a.-nal3 ",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "wait",
+                "func": "wait",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "5",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "click",
+                "func": "click",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "button.sqdOP.L3NKy.y3zKF     ",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "wait",
+                "func": "wait",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "2",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "click",
+                "func": "click",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "button.sqdOP.L3NKy.y3zKF     ",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "wait",
+                "func": "wait",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "2",
+                        "typeDefault": "str"
+                    }
+                ]
+            },
+            {
+                "name": "click",
+                "func": "click",
+                "params": [
+                    {
+                        "type": "str",
+                        "value": "button.sqdOP.L3NKy.y3zKF     ",
+                        "typeDefault": "str"
+                    }
+                ]
+            }
+        ],
+        "prop": "nbrowser",
+        "propout": "payload",
+        "object": "msg",
+        "objectout": "msg",
+        "close": false,
+        "show": true,
+        "ssl": false,
+        "outputs": 1,
+        "x": 840,
+        "y": 200,
+        "wires": [
+            [
+                "c9831c41.36637"
+            ]
+        ]
+    },
+    {
+        "id": "57d987d8.63d3c8",
+        "type": "telegram bot",
+        "z": "",
+        "botname": "serverh2h_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "verboselogging": false
+    }
+]
